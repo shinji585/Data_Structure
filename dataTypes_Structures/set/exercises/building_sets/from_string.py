@@ -7,4 +7,7 @@ endpoint: str = "https://api.github.com/users/{shinji585}"
 
 
 def set_endpoint(endpoint: str) -> set:
-    return {chr(x) for x in endpoint if chr(x) >= 32 and chr(x) <= 126}
+    return {ord(x) for x in endpoint if ord(x) >= 32 and ord(x) <= 126}
+
+
+print(set_endpoint(endpoint=endpoint))
