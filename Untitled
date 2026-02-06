@@ -1,0 +1,17 @@
+# la primera estructura diseñada en collections fue deque 
+# esta diseñado principalmente para generealizar estructuras como stacks y queues 
+# con una memoria mas eficiente no creando espacios adicionales como si lo realizaria 
+# las list 
+# dicha eficiencia permite agregar y remover elementos utilizando las funciones 
+# append and pop 
+#
+# deque es mas eficiente que las listas ya que no cuenta con el mismo tiempo de complejidad computacional 
+# esto por que python en las listas tienen que mover todos los elementos a la derecha para poder insertar un nuevo item a el comienzo 
+
+# encontramos dos operaciones principales que se dan de acuerdo a su naturalidad 
+# la primera se da cuando agregamos un item a el final de una queue y esto es conocido como enqueue operation 
+# mientras que eliminar un item del comienzo de una queue es llamado dequeue 
+
+
+
+
