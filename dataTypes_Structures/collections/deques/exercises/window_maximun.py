@@ -1,24 +1,25 @@
 from collections import deque
 from typing import Union
-# given:
-#
-# a list of integers
-# a window size k
-#
-#
-# return a list with the maxmum value of each sliding window
 
 
-def window(arr: list, k: int) -> Union[deque, list]:
-    if k == 1:
-        return arr
+def window_maximun_value(numbers: list[Union[int, float]], k: int) -> list[int]:
+    q = deque()
+    l = r = 0
+    output: list = []
 
-    arr_deque = deque(maxlen=len(arr) - k + 1)
+    while r < len(numbers):
+        while q and numbers[q[-1]] < numbers[r]:
+            q.pop()
+        q.append(r)
+        # remove left val from window
+        if l > q[0]:
+            q.popleft()
 
-    for i in arr:
-        arr_deque.append(arr[i])
-        if arr[i] > arr_deque[i]:
-            arr_deque.append(arr[i])
+        if (r + 1) >= k:
+            output.append(numbers[q[0]])
+            l += 1
+        r += 1
+    return output
 
 
-print(window(nums=[1, 3, -1, -3, 5, 3, 6, 7], k=3))
+print(window_maximun_value(numbers=[1, 2, 3, 4], k=2))
