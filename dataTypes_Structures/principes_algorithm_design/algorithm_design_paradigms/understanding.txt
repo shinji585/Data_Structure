@@ -1,0 +1,36 @@
+# en este archivo se estudiara el patron de diseño de algoritmo
+# divide and conquer con el fin de enter primero este, y con el pasar del tiempo
+# entender los otros dos patrons que son el dynamic programming and grady algorithms
+
+# divide and conquer algorithm es un metodo o techica usada para resolver problemas en programacion
+# esto consiste en dividir el problema principal en subproblems, y resolviendo cada uno individualmente
+# y al final funsionando las soluciones por cada subproblems y obteniendo la solucion original del problema
+
+# los problemas de divide and conquer pueden ser divididos en 3 pasos individuales
+# divide, Conquer and Merge
+
+
+# Divide: consiste en romper el problema original en problemas mas pequeños, cada subproblema puede representar una parte de todo el problema
+# la meta es dividir el problema hasta que no sea posible realizar mas divisiones
+
+# Conquer: cada subproblema debe ser resolvido individualmente, si un subproblema es lo sifuciente pequeño, resolvemos directamente sin mas recursividad
+# la meta es encontrar las soluciones para cada subproblema independientemente
+
+
+# Merge: al final combinamos los subproblemas para obtener la solucion final del problema completo, una vez resultos los subproblemas mas pequeños, combinamos recursivamente
+# sus soluciones para obtener la solucion del problema mas grande, el objectivo es formular una solucion para el problema original fusionando los resultados de los subproblemas.
+
+# en divide and conquer cada subproblema es independiente del otro es decir que cada solucion de un subproblem no es necesitado para el resultado de otro subproblem
+
+# las aplicaciones de el algoritmo de diseño de paradigmas son:
+# binary search, quicksort, merge sort, closest pair of points, strassen's algorihtm, cooley-tukey fast fourier transform algorithm, Karatsuba algorithm for fast multiplication
+
+
+# las ventajas de utilizar divide and conquer se dividen en que podemos resolver problemas dificiles que requieran ser divididos, implementar algoritmos de eficiencia, paralelismo donde las maquinas comparten memoria, memory access
+
+
+# las desventajas de utilizar divide and conquer se traducen en: overhead, complexity, difficulty of implementation, memory limitations
+
+
+# nota antes de implementar cualquier algoritmo de divide and conquer tengo que entender lo que es la recursividad y como esta complementa la solucion de estos problemas
+

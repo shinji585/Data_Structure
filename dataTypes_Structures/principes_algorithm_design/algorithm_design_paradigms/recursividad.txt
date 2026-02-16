@@ -1,0 +1,14 @@
+El concepto de recursividad a sido entendido mal, ya que se dice que recursividad es el hecho de que una funcion se llame a si misma cuando es todo lo contrario, recursivamente hablando, recursion es: 
+
+|> solving a problem by defining it in terms of a smaller version of itself 
+
+esto ultimo es divide and conquer puro ya que cuando aplicamos recursividad estamos dividiendo un problema en pequeñas versiones de el mismo solo para obtener una solucion de este 
+
+entonces la recursividad lo que busca es dividir un problema en subproblemas hasta que el mismo problema sea trivial 
+
+ejemplo es el factorial de un numero que se vuelve trivial solo hasta que el numero es igual a 1 
+
+|> ¿como se implementa la recursividad?
+
+esta se implementa de la siguiente forma primero hay que tener en cuenta que no es un loop, no es una modificacion de el mismo (la funcion) el resultado mas bien: cada llamada recursiva es complementamente una nueva ejecucion de la funcion en su propia memoria, ellos apilan en la cima a el otro 
+

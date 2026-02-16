@@ -48,5 +48,8 @@ if __name__ == "__main__":
     array2.recorrer()
 
     array2.insertar_inicio(20)
-    print("Array 2 con nuevo valor y nuevo desplazamiento")
+    print("\nArray 2 con nuevo valor y nuevo desplazamiento")
+    array2.recorrer()
+
+    array2.insertar_inicio(valor_insertar=30)
     array2.recorrer()
