@@ -1,6 +1,6 @@
 # en este documento se implementara y se creara lo que viene siendo la clase array como una ayuda para entender el funcionamiento, comportamiento y diseño de esta
 # dicha clase sera una implementacion sin tener que utilizar librerias que tengan que ver alguna relacion con lo que viene siendo los arrays y su construccion natural
-from typing import Self, TypeVar, Generic, Iterable
+from typing import TypeVar, Generic, Iterable
 
 T = TypeVar("T")
 # Los arrays son tipos de datos que se pueden clasificar en dos estructuras
@@ -74,7 +74,7 @@ class Static_Array(Generic[T]):
         return self.__items[i]
 
     def set_at(self, i: int, value: T) -> None:
-        if i <= 0 or i >= self.__capacity:
+        if 0 <= i < self.__capacity:
             raise Exception("Index out of bounds.")
 
         self.__items[i] = value
