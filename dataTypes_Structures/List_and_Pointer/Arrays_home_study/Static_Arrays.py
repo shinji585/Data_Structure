@@ -53,6 +53,13 @@ class Static_Array(Generic[T]):
         self.__items[self.__size] = value
         self.__size += 1
 
+    def insertar_final(self, value: T) -> None:
+        if self.__size == self.__capacity:
+            raise Exception("The Array is full.")
+
+        self.__items[self.__size] = value
+        self.__size += 1
+
     # para obtener el size
     def len(self) -> int:
         return self.__size
@@ -74,7 +81,7 @@ class Static_Array(Generic[T]):
         return self.__items[i]
 
     def set_at(self, i: int, value: T) -> None:
-        if 0 <= i < self.__capacity:
+        if not (0 <= i < self.__capacity):
             raise Exception("Index out of bounds.")
 
         self.__items[i] = value
@@ -102,4 +109,14 @@ if __name__ == "__main__":
 
     print(array)
 
-# and this an static array and how implement it
+    # and this an static array and how implement it
+    #
+    #
+
+    # aplicamos el metodo de insertar_final
+    array.insertar_final(value=97)
+    array.insertar_final(value=18)
+    array.insertar_final(value=77)
+
+    # mostramos el array con los cambios
+    print(f"\nArray con las inserciones al final: {array}")

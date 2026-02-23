@@ -1,3 +1,0 @@
-
-TypeError: Can't instantiate abstract class WareHouse without an implementation for abstract methods 'send', 'throw'
-

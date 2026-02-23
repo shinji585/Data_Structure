@@ -78,7 +78,7 @@ class Dynamic_Array(Generic[T]):
 
 
 if __name__ == "__main__":
-    array_dinamico = Dynamic_Array(capacity=3)
+    array_dinamico: Dynamic_Array[int] = Dynamic_Array(capacity=3)
 
     array_dinamico.add(value=1)
     array_dinamico.add(value=2)
