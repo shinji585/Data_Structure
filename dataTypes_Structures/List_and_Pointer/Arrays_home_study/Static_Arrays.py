@@ -49,13 +49,7 @@ class Static_Array(Generic[T]):
         if self.__capacity == self.__size:
             raise Exception("The Array is full.")
 
-        # si el array no esta full entonces agregamos el elemento y nos movemos una posicion en el size
-        self.__items[self.__size] = value
-        self.__size += 1
-
-    def insertar_final(self, value: T) -> None:
-        if self.__size == self.__capacity:
-            raise Exception("The Array is full.")
+        # si el array no esta full entonces agregamos el elemento y nos movemos una posicion en el siguiente
 
         self.__items[self.__size] = value
         self.__size += 1
@@ -74,7 +68,7 @@ class Static_Array(Generic[T]):
 
     # creamos los famosos getters y setter del Static_Array pero la diferencia es que tenemos que validar primero que el indiex exista para el get
     def get_at(self, i: int) -> T:
-        if 0 <= i < self.__capacity:
+        if not (0 <= i < self.__capacity):
             raise Exception("Index out of bounds.")
 
         # en caso contrario retornamos el elemento
@@ -108,15 +102,3 @@ if __name__ == "__main__":
     array.set_at(i=8, value=20)
 
     print(array)
-
-    # and this an static array and how implement it
-    #
-    #
-
-    # aplicamos el metodo de insertar_final
-    array.insertar_final(value=97)
-    array.insertar_final(value=18)
-    array.insertar_final(value=77)
-
-    # mostramos el array con los cambios
-    print(f"\nArray con las inserciones al final: {array}")
