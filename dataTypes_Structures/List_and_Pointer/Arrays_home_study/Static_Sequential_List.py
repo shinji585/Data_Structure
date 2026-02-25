@@ -15,9 +15,9 @@ class FixedArrayList(Generic[T]):
     # los primeros metodos a generar son los metodos de insertar que siguen la misma regla logica
     # primero verifican que el size y la capacity no sean la misma luego reorganizan los elementos si es posible (esto no aplica para insertar a el final)
     # luego increamentan
-    def add_init(self, value: T) -> None:
+    def add_start(self, value: T) -> None:
         if self.__size == self.__capacity:
-            raise IndexError(
+            raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
 
@@ -32,7 +32,7 @@ class FixedArrayList(Generic[T]):
 
     def add_end(self, value: T) -> None:
         if self.__size == self.__capacity:
-            raise IndexError(
+            raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
 
@@ -42,7 +42,7 @@ class FixedArrayList(Generic[T]):
 
     def insertAt(self, value: T, i: int) -> None:
         if self.__size == self.__capacity:
-            raise IndexError(
+            raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
 
@@ -55,8 +55,34 @@ class FixedArrayList(Generic[T]):
         # en caso de que dicha exception no se cumplan entonces movemos los ementos a la derecha y agregamos el elemento en la posicion que queremos
         # tenemos que tener en cuenta un concepto importante y es que el for each va desde size hasta el index
         for k in range(self.__size, i, -1):
-            self.__A[k + 1] = self.__A[k]
+            self.__A[k] = self.__A[
+                k - 1
+            ]  # we move the value on the positions 0 to size into the next right positions until k stay on the positions that i says
 
         # luego de mover los elementos agregamos el valor en dicha posicion y lo agregamos
         self.__A[i] = value
+        self.__size += 1
+
+    # implementamos los metodos antes y despues
+    def insert_after(self, value: T) -> None:
+        if self.__size == self.__capacity:
+            raise RuntimeError(
+                f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
+            )
+
+        # si no se lanza la exception entonces agregamos el valor en la posicion siguiente del size y aumentamos este
+        self.__A[self.__size + 1] = value
+        self.__size += 1
+
+    def insert_before(self, value: T) -> None:
+        if self.__size == self.__capacity:
+            raise RuntimeError(
+                f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
+            )
+
+        for k in range(self.__size, self.__size - 1, -1):
+            self.__A[k] = self.__A[k - 1]
+
+        # agregamos el valor en la posicion anterior a size
+        self.__A[self.__size - 1] = value
         self.__size += 1
