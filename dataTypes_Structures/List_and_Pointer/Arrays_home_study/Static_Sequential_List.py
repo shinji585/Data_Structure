@@ -1,29 +1,45 @@
 # en esta clase se implementara los metodos de la clase array estudiado en clases y utilizando mi logica a lo pytonic
-from typing import Sized, TypeVar, Generic
+from typing import TypeVar, Generic
 
 T = TypeVar(name="T")
 
 
 class FixedArrayList(Generic[T]):
     def __init__(self, capacity: int) -> None:
+        # verificamos que capacity no sea igual a cero o menor a esta
+        if capacity <= 0:
+            raise Exception("The capacity can't be equal or lower than zero")
+
         self.__capacity = capacity
         self.__size = 0
         self.__A: list = self.__capacity * [
             None
         ]  # [None] significa que la matrix esta vacia
 
+    # creamos una funcion llamada compare que realizara la comparacion entre el size y la capacity para ahorra codigo repetitivo
+    def __compare__(self) -> bool:
+        return self.__size == self.__capacity
+
+    # implementamos el metodo len
+    def __len__(self) -> int:
+        return self.__size
+
+    # implementamos el metodo valid_range el cual valida que i no sea menor o igual que cero o que i no sea mayor que el size
+    def __valid_range__(self, i: int) -> bool:
+        return not (0 <= i < self.__size)
+
     # los primeros metodos a generar son los metodos de insertar que siguen la misma regla logica
     # primero verifican que el size y la capacity no sean la misma luego reorganizan los elementos si es posible (esto no aplica para insertar a el final)
     # luego increamentan
     def add_start(self, value: T) -> None:
-        if self.__size == self.__capacity:
+        if self.__compare__():
             raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
 
         # en caso contrario que esto no se cumpla
         if self.__size >= 0:
-            for k in range(self.__size, 0, -1):
+            for k in range(self.__size, 0):
                 self.__A[k] = self.__A[k - 1]
 
             # agregamos el elemento al inicio y aumentamos la cantidad de elementos que esta contiene
@@ -31,7 +47,7 @@ class FixedArrayList(Generic[T]):
             self.__size += 1
 
     def add_end(self, value: T) -> None:
-        if self.__size == self.__capacity:
+        if self.__compare__():
             raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
@@ -41,20 +57,20 @@ class FixedArrayList(Generic[T]):
             self.__size += 1
 
     def insertAt(self, value: T, i: int) -> None:
-        if self.__size == self.__capacity:
+        if self.__compare__():
             raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
 
         # ahora validamos que el index no este por fuera del size
-        if 0 <= i <= self.__size:
+        if self.__valid_range__(i):
             raise IndexError(
                 f"Index {i} out bounds for insert: valid range 0 to {self.__size - 1}"
             )
 
         # en caso de que dicha exception no se cumplan entonces movemos los ementos a la derecha y agregamos el elemento en la posicion que queremos
         # tenemos que tener en cuenta un concepto importante y es que el for each va desde size hasta el index
-        for k in range(self.__size, i, -1):
+        for k in range(self.__size, i):
             self.__A[k] = self.__A[
                 k - 1
             ]  # we move the value on the positions 0 to size into the next right positions until k stay on the positions that i says
@@ -66,7 +82,7 @@ class FixedArrayList(Generic[T]):
     # implementamos los metodos antes y despues
     def insert_after(self, value: T, value_reference: T) -> None:
         pos = -1
-        if self.__size == self.__capacity:
+        if self.__compare__():
             raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
@@ -91,7 +107,7 @@ class FixedArrayList(Generic[T]):
     # ya teniendo esa logica de posicionamiento
     def insert_before(self, value: T, value_reference: T) -> None:
         pos = -1
-        if self.__size == self.__capacity:
+        if self.__compare__():
             raise RuntimeError(
                 f"Elements must remain in positions 0 to {self.__size - 1} with not gaps"
             )
@@ -118,36 +134,37 @@ class FixedArrayList(Generic[T]):
     # los siguientes metodos elimina valores dentro del array utilizando estrategias diferentes cada uno
     # con el primer metodo que se comenzara sera eliminar al inicio
     def remove_start(self) -> None:
-        if self.__size == self.__capacity:
-            raise RuntimeError(
-                f"Elements must remain in pos 0 to {self.__size - 1} with not gaps"
-            )
-
         # si no tenemos una exception entonces eliminamos el elemento en la posicion 0 y le restamos 1 a size
         for k in range(0, self.__size - 1):
             self.__A[k] = self.__A[k - 1]
         self.__size -= 1
 
     def remove_end(self) -> None:
-        if self.__size == self.__capacity:
-            raise RuntimeError(
-                f"Elements must remain in pos 0 to {self.__size - 1} with not gaps"
-            )
-
         self.__size -= 1
 
     def remove_at(self, i: int) -> None:
-        if self.__size == self.__capacity:
-            raise RuntimeError(
-                f"Elements must remain in pos 0 to {self.__size - 1} with not gaps"
-            )
-
-        if 0 <= i <= self.__size:
+        if self.__valid_range__(i):
             raise IndexError(
                 f"Index {i} out bounds for insert: valid range 0 to {self.__size - 1}"
             )
 
         for k in range(i, self.__size - 1):
+            self.__A[k] = self.__A[k - 1]
+
+        self.__size -= 1
+
+    def remove_value(self, value: T) -> None:
+        pos = -1
+
+        for k in range(0, self.__size):
+            if self.__A[k] == value:
+                pos = k
+
+        if 0 < pos or pos >= self.__size:
+            raise Exception("Reference not found")
+
+        # si encontramos la posicion de la referencia entonces movemos los elementos a la izquierda desde el indice de la referencia hasta el size
+        for k in range(pos, self.__size - 1):
             self.__A[k] = self.__A[k - 1]
 
         self.__size -= 1
