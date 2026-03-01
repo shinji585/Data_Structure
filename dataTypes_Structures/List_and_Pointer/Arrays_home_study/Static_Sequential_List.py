@@ -70,7 +70,7 @@ class FixedArrayList(Generic[T]):
 
         # en caso de que dicha exception no se cumplan entonces movemos los ementos a la derecha y agregamos el elemento en la posicion que queremos
         # tenemos que tener en cuenta un concepto importante y es que el for each va desde size hasta el index
-        for k in range(self.__size, i):
+        for k in range(self.__size, i, -1):
             self.__A[k] = self.__A[
                 k - 1
             ]  # we move the value on the positions 0 to size into the next right positions until k stay on the positions that i says
@@ -168,3 +168,61 @@ class FixedArrayList(Generic[T]):
             self.__A[k] = self.__A[k - 1]
 
         self.__size -= 1
+
+    # impementamos los metodos de busqueda
+    # el primer metodo a implementar es el sequencial que se le pasa un valor y devuelve -1 si no esta o la posicion de este
+    def search_sequential(self, value: T) -> int:
+        pos = -1
+
+        # buscamos los valores y comparamos
+        for k in range(0, self.__size):
+            if self.__A[k] == value:
+                pos = k
+
+        # retornamos el valor
+        return pos
+
+    # implementamos un metodo para verificar si el array esta ordenado
+    def __is_sorted(self) -> bool:
+        for k in range(0, self.__size - 1):
+            if self.__A[k] > self.__A[k + 1]:
+                return False
+        return True
+
+    # implementamos el algoritmo de ordenamiento que nos permite ordenar nuestro array
+    def __insertion__sort(self) -> None:
+        for k in range(1, self.__size):
+            key = self.__A[k]
+            j = k - 1
+
+            while j >= 0 and key < self.__A[j]:
+                self.__A[j + 1] = self.__A[j]
+                j -= 1
+
+            self.__A[j + 1] = key
+
+    # impementamos la busqueda sequencial
+    def binary_search(self, value: T) -> int:
+        start = 0
+        end = self.__size - 1
+
+        if not self.__is_sorted():
+            raise ValueError("Binary search requires sorted Array.")
+
+        while start <= end:
+            middle = (start + end) // 2
+
+            if self.__A[middle] == value:
+                return middle
+            elif self.__A[middle] < value:
+                start = middle + 1
+
+            else:
+                end = middle - 1
+
+        return -1
+
+
+# esta es la mejor implementacion que he hecho entendi por primera vez una estructura de datos y no me importa como haya quedado
+# nota: nada de este codigo se cambiara una mejor version de este sin los comentarios y la suciedad del codigo sera implementado por ahora se
+# deja este aqui como muestra de todo el proceso mental para poder llegar a una solucion
