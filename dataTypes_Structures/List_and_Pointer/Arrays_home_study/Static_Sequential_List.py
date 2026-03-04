@@ -201,6 +201,53 @@ class FixedArrayList(Generic[T]):
 
             self.__A[j + 1] = key
 
+    def __selection_sort(self) -> None:
+        for k in range(0, self.__size - 1):
+            menor = self.__A[k]
+            pos = -1
+            for j in range(1 + k, self.__size):
+                if self.__A[j] < menor:
+                    menor = self.__A[j]
+                    pos = j
+
+            self.__A = menor
+            self.__A[k], self.__A[pos] = menor, self.__A[k]
+
+    def __burble_sort(self) -> None:
+        swapped = False
+        for k in range(0, self.__size):
+            for j in range(0, self.__size - k - 1):
+                if self.__A[j] > self.__A[j + 1]:
+                    self.__A[j], self.__A[j + 1] = self.__A[j + 1], self.__A[j]
+                    swapped = True
+            if not swapped:
+                break
+
+    def partition(self, low: int, high: int) -> int:
+        pivot = self.__A[high]
+        i = low - 1
+
+        for j in range(low, high):
+            if self.__A[j] < pivot:
+                i += 1
+                self.__A[i], self.__A[j] = self.__A[j], self.__A[i]
+
+        self.__A[i + 1], self.__A[high] = (
+            self.__A[high],
+            self.__A[i + 1],
+        )
+        return i + 1
+
+    def quicksort(self, low, hight) -> None:
+        if low < hight:
+            pi = self.partition(low, hight)
+
+            self.quicksort(low, pi - 1)
+            self.quicksort(pi + 1, hight)
+
+    def sort(self) -> None:
+        self.quicksort(0, self.__size - 1)
+
     # impementamos la busqueda sequencial
     def binary_search(self, value: T) -> int:
         start = 0
