@@ -255,4 +255,3 @@ class FixedArrayList(Generic[T]):
                 right = mid - 1
 
         raise ValueNotFoundError(f"Value {value} was not found in the array.")
-
