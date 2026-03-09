@@ -1,13 +1,10 @@
-import ttkbootstrap as tb
+import customtkinter as ctk
 from view.FixedArrayListView import MatteApp
 
-
 def main() -> None:
-    root = tb.Window(themename="darkly")
+    root = ctk.CTk()
     MatteApp(root)
     root.mainloop()
 
-
 if __name__ == "__main__":
     main()
-
