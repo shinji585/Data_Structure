@@ -37,6 +37,32 @@ class Node(Generic[T]):
         return f"Node(data: {self.data}, next: Node(data: {self.next}))"
 
 
+# la funcion traverse funciona de la siguiente manera
+def traverseList(head: Optional[Node]) -> None:
+    while head is not None:
+        # recorremos head mientras que este no sea igual a None  (este vacio)
+        print(head.data, end="")  # mostramos su dato
+        if head.next is not None:
+            # si su siguiente valor no es de tipo None mostramos que un proximo valor esta por venir
+            print(" -> ", end="")
+        head = head.next
+    print()
+
+
+def traverseList_Recursive(head: Optional[Node]) -> None:
+    if head is None:
+        print()
+        return
+
+    print(head.data, end="")
+
+    if head.next is not None:
+        print(" -> ", end="")
+
+    # aplicamos el mismo proceso recursivamente hasta mostrar todos los elementos
+    traverseList_Recursive(head=head.next)
+
+
 if __name__ == "__main__":
     node1 = Node(data=20)
     node2 = Node(data="samuel")
@@ -54,3 +80,11 @@ if __name__ == "__main__":
     print(
         f"\nReference of the nodes (changed): \n{repr(node1)}\n{repr(node2)}\n{repr(node3)}"
     )
+
+    # en esta seccion se explorara lo que es el transversar un node (esto implica recorrerlo)
+
+    # para recorrer un node utilizamos una estructura llamada traverse
+    print("\nLineal form: ")
+    traverseList(head=node1)
+    print("\nRecurisve form: ")
+    traverseList_Recursive(head=node1)
