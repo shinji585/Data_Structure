@@ -1,3 +1,1 @@
-print("hola mundo")
-
-print("hola mundo")
+print("prueba de que se configuro correctamente en ubunto neovim")
