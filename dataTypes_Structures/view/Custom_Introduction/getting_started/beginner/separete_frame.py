@@ -57,3 +57,6 @@ class App(customtkinter.CTk):
 # creamos una instancia 
 app = App()
 app.mainloop()
+
+
+# una mejor forma de hacer lo anterior se dara en el archivo dynamic frame class
